@@ -15,7 +15,8 @@ const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI)
 	.then((result) => { // promise verified
 		console.log('connected to mongodb');
-		app.listen(3000); // listen for requests only after connected to db
+		// app.listen(3000); // listen for requests only after connected to db
+		module.exports = app; // required for Vercel deployment?  10/20/2025
 	})
 	.catch((err) => console.log(err)); // catch error
 
