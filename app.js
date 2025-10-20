@@ -8,7 +8,8 @@ const blogRoutes = require('./routes/blogRoutes'); // blog routes
 const app = express();
 
 // mongoDB connection string
-dbURI = 'mongodb+srv://netninja:A3mt47t68jGoD8Ya@nodetuts.gze3ktu.mongodb.net/TestDatabase';
+//dbURI = 'mongodb+srv://netninja:A3mt47t68jGoD8Ya@nodetuts.gze3ktu.mongodb.net/TestDatabase';
+const dbURI = process.env.MONGODB_URI;
 
 // mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true } )
 mongoose.connect(dbURI)
