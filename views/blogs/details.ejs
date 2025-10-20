@@ -1,0 +1,39 @@
+<html lang='en'>
+<%- include('../partials/head.ejs') %>
+
+
+<body>
+	<%- include('../partials/nav.ejs') %>
+
+	<div class='details content'>
+		<h2><%= blog.title %></h2>
+		<div class='content'>
+			<p><%= blog.body %></p>
+		</div>
+		<!-- data-attribute allows you to add any attributes on the fly -->
+		<a class='delete' data-doc='<%= blog._id %>'><img src='/trashcan.svg' alt="delete icon"/></a>
+	</div>
+
+
+	<%- include('../partials/footer.ejs') %>
+
+	<script>
+		const trashcan = document.querySelector('a.delete');
+
+		trashcan.addEventListener('click', (event) => {
+			const endpoint = `/blogs/${trashcan.dataset.doc}`; // backticks for template literal
+				// ${} used to insert variable into string
+				// dataset-doc selected as dataset.doc on trashcan element
+
+			fetch(endpoint, { // AJAX request using fetch API
+				method: 'DELETE'
+			})
+			.then((response) => response.json() ) // receives JSON data (redirect) back from server, parses into JS object
+			.then((data) => window.location.href = data.redirect ) // uses redirect property in JSON object received back from server
+			.catch((err) => {
+				console.log(err);
+			});
+		});
+	</script>
+</body>
+</html>
